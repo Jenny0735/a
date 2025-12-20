@@ -4,196 +4,27 @@
     <meta charset="UTF-8">
     <title>虚拟电厂·温控负荷故障恢复仿真平台</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 强制刷新缓存 -->
+    <base href="https://jenny0735.github.io/a/">
+    <link rel="canonical" href="https://jenny0735.github.io/a/">
     <style>
-        /* ========== 全局科技暗黑风 ========== */
-        :root {
-            --bg: #0d1117;
-            --card: #161b22;
-            --primary: #58a6ff;
-            --green: #238636;
-            --red: #da3633;
-            --text: #c9d1d9;
-            --sub: #8b949e;
-            --border: #30363d;
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            overflow-x: hidden;
-        }
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-        /* ========== 粒子背景 ========== */
-        #particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-        /* ========== 主屏 ========== */
-        .hero {
-            position: relative;
-            z-index: 1;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-        }
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--primary), #79c0ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--sub);
-            margin-bottom: 3rem;
-        }
-        /* ========== 板块卡片 ========== */
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            width: 100%;
-        }
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            cursor: pointer;
-            transition: transform .3s, box-shadow .3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(88, 166, 255, 0.15), transparent);
-            transition: left .6s;
-        }
-        .card:hover::before {
-            left: 100%;
-        }
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 24px rgba(88, 166, 255, .25);
-        }
-        .card h3 {
-            margin-bottom: .8rem;
-            font-size: 1.4rem;
-            color: var(--primary);
-        }
-        .card p {
-            color: var(--sub);
-            line-height: 1.5;
-        }
-        /* ========== 详情页 ========== */
-        .detail {
-            display: none;
-            position: relative;
-            z-index: 2;
-            max-width: 1000px;
-            margin: 3rem auto;
-            padding: 2rem;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            animation: fadeIn .5s;
-        }
-        .detail.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .detail header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-        .detail h2 {
-            color: var(--primary);
-        }
-        .close {
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: var(--sub);
-            transition: color .2s;
-        }
-        .close:hover {
-            color: var(--red);
-        }
-        /* ========== 模拟控制台 ========== */
-        .console {
-            background: #010409;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem;
-            font-family: "Courier New", monospace;
-            font-size: .9rem;
-            color: #7ce38b;
-            white-space: pre-wrap;
-            max-height: 320px;
-            overflow-y: auto;
-        }
-        /* ========== 按钮 ========== */
-        button {
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            padding: .6rem 1.2rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background .2s;
-        }
-        button:hover {
-            background: #79c0ff;
-        }
-        /* ========== 响应式 ========== */
-        @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .cards {
-                grid-template-columns: 1fr;
-            }
-        }
+        /* ===== 样式同之前，略 ===== */
+        :root{--bg:#0d1117;--card:#161b22;--primary:#58a6ff;--text:#c9d1d9;--sub:#8b949e;}
+        *{box-sizing:border-box;margin:0;padding:0;}
+        body{background:var(--bg);color:var(--text);font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;text-align:center;}
+        .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2rem;}
+        .hero h1{font-size:2.6rem;margin-bottom:1rem;background:linear-gradient(90deg,var(--primary),#79c0ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+        .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;max-width:900px;margin-top:2rem;}
+        .card{background:var(--card);border:1px solid #30363d;border-radius:12px;padding:1.8rem;cursor:pointer;transition:transform .3s,box-shadow .3s;}
+        .card:hover{transform:translateY(-5px);box-shadow:0 8px 24px rgba(88,166,255,.35);}
+        .detail{display:none;max-width:800px;margin:2rem auto;padding:2rem;background:var(--card);border-radius:12px;text-align:left;}
+        .detail.active{display:block;}
+        .close{float:right;font-size:1.4rem;cursor:pointer;color:var(--sub);}
+        .close:hover{color:#f85149;}
+        button{background:var(--primary);color:#fff;border:none;padding:.6rem 1.2rem;border-radius:6px;cursor:pointer;font-size:1rem;}
     </style>
 </head>
 <body>
-<canvas id="particles"></canvas>
-
-<!-- 主页 -->
 <section class="hero" id="home">
     <h1>虚拟电厂 · 温控负荷故障恢复仿真</h1>
     <p>聚合海量分散温控负荷，打造可交互、可视化的“故障恢复缓冲垫”</p >
@@ -221,120 +52,73 @@
     </div>
 </section>
 
-<!-- 场景设定 -->
+<!-- 详情页 -->
 <article class="detail" id="scenario">
-    <header>
-        <h2>场景设定</h2>
-        <span class="close" onclick="hide()">✖</span>
-    </header>
-    <p>拖动滑块即可调整参数，点击“运行优化”后将自动跳转结果。</p >
-    <label>备用容量 (kW): <input type="range" id="cap" min="20" max="100" value="50"><span id="capv">50</span></label><br><br>
-    <label>允许温度偏移 (℃): <input type="range" id="offset" min="1" max="5" value="2"><span id="offv">2</span></label><br><br>
+    <span class="close" onclick="hide()">✖</span>
+    <h2>场景设定</h2>
+    <p>备用容量 (kW)：<input type="range" id="cap" min="20" max="100" value="50" oninput="capV.textContent=this.value"><span id="capV">50</span></p >
+    <p>允许温度偏移 (℃)：<input type="range" id="off" min="1" max="5" value="2" oninput="offV.textContent=this.value"><span id="offV">2</span></p >
     <button onclick="runOpt()">运行优化</button>
 </article>
 
-<!-- 优化策略 -->
 <article class="detail" id="optimize">
-    <header>
-        <h2>优化策略对比</h2>
-        <span class="close" onclick="hide()">✖</span>
-    </header>
-    <p>下方控制台实时输出两种策略的负荷恢复量与频率波动。</p >
-    <div class="console" id="optLog">等待运行 …</div>
+    <span class="close" onclick="hide()">✖</span>
+    <h2>优化策略对比</h2>
+    <pre id="optLog">等待运行 …</pre>
 </article>
 
-<!-- 网络拓扑 -->
 <article class="detail" id="topology">
-    <header>
-        <h2>网络拓扑图</h2>
-        <span class="close" onclick="hide()">✖</span>
-    </header>
-    <p>（示意）故障点已标红，绿色节点为成功恢复负荷。</p >
-    <div class="console" id="topoLog">拓扑数据加载中 …</div>
+    <span class="close" onclick="hide()">✖</span>
+    <h2>网络拓扑图</h2>
+    <pre>节点  状态        备注
+#1    正常        主电源
+#2    故障        线路跳闸
+#3    已恢复      充电站(高优先级)
+#4    已恢复      空调#A103,#A105
+#5    延迟        空调#A202,#A204,#A306
+#6    正常        无负荷</pre>
 </article>
 
-<!-- 温度曲线 -->
 <article class="detail" id="thermal">
-    <header>
-        <h2>空调温度曲线</h2>
-        <span class="close" onclick="hide()">✖</span>
-    </header>
-    <p>延迟供电的 5 台空调室温仍在舒适区间，验证热惯性可行。</p >
-    <div class="console" id="thermalLog">温度数据加载中 …</div>
-</article>
-
-<!-- 项目说明 -->
-<article class="detail" id="about">
-    <header>
-        <h2>项目说明</h2>
-        <span class="close" onclick="hide()">✖</span>
-    </header>
-    <p>
-        本网站通过纯前端方式演示“温控负荷聚合虚拟电厂”在配电网故障恢复中的价值。  
-        核心思路：利用空调/冷链的热惯性，短时放宽温度区间 → 释放功率缓冲 → 优先恢复高价值负荷。  
-    </p >
-    <p>
-        后端算法可采用 Python + OR-Tools 求解混合整数规划，或直接调用 Matpower/OpenDSS 进行潮流计算。  
-        仓库地址（欢迎 Star & Fork）：
-        <a href=" " target="_blank">https://github.com/yourname/VirtualPowerPlant-TCL</a >
-    </p >
-</article>
-
-<script>
-    /* ========== 粒子背景 ========== */
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    let w, h, particles;
-    function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-        particles = [];
-        for (let i = 0; i < Math.floor(w * h / 18000); i++) {
-            particles.push({
-                x: Math.random() * w,
-                y: Math.random() * h,
-                r: Math.random() * 1.2,
-                d: Math.random() * 0.4 + 0.2
-            });
-        }
-    }
-    window.addEventListener('resize', resize);
-    resize();
-    function drawParticles() {
-        ctx.clearRect(0, 0, w, h);
-        ctx.fillStyle = 'rgba(88, 166, 255, 0.35)';
-        particles.forEach(p => {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fill();
-            p.y += p.d;
-            if (p.y > h) p.y = 0;
-        });
-        requestAnimationFrame(drawParticles);
-    }
-    drawParticles();
-
-    /* ========== 板块切换 ========== */
-    function show(id) {
-        document.querySelectorAll('.detail').forEach(el => el.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        window.scrollTo({top: 0, behavior: 'smooth'});
-        // 根据不同板块加载假数据
-        if (id === 'thermal') {
-            document.getElementById('thermalLog').textContent =
-`空调编号 | 延迟供电(min) | 温度变化(℃)
+    <span class="close" onclick="hide()">✖</span>
+    <h2>空调温度曲线</h2>
+    <pre>空调编号 | 延迟供电(min) | 温度变化(℃)
 #A103     15             25→27.1
 #A105     18             24.5→26.8
 #A202     12             25.3→27.0
 #A204     20             24.8→27.2
 #A306     14             25.1→26.9
-（均在舒适区间 24-28℃ 内）`;
-        }
-        if (id === 'topoLog') {
-            document.getElementById('topoLog').textContent =
-`节点  状态        备注
-#1    正常        主电源
-#2    故障        线路跳闸
-#3    已恢复      充电站(高优先级)
-#4    已恢复      空调#A103,#A105
-#5    延迟        空调#A202,#A20
+（均在舒适区间 24-28℃ 内）</pre>
+</article>
+
+<article class="detail" id="about">
+    <span class="close" onclick="hide()">✖</span>
+    <h2>项目说明</h2>
+    <p>本网站通过纯前端方式演示“温控负荷聚合虚拟电厂”在配电网故障恢复中的价值。核心思路：利用空调/冷链的热惯性，短时放宽温度区间 → 释放功率缓冲 → 优先恢复高价值负荷。</p >
+    <p>仓库地址：<a href=" " target="_blank">https://github.com/Jenny0735/a</a ></p >
+</article>
+
+<script>
+    function show(id) {
+        document.querySelectorAll('.detail').forEach(d => d.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+    function hide() {
+        document.querySelectorAll('.detail').forEach(d => d.classList.remove('active'));
+    }
+    function runOpt() {
+        const cap = document.getElementById('cap').value;
+        const off = document.getElementById('off').value;
+        document.getElementById('optLog').textContent =
+`备用容量: ${cap} kW  允许偏移: ±${off} ℃
+————————————
+策略            恢复负荷    频率波动
+盲目全部供电     35 kW      1.8 Hz
+智能有序恢复     68 kW      0.4 Hz
+结论: 智能策略多恢复 94% 负荷，频率更稳定。`;
+        show('optimize');
+    }
+</script>
+</body>
+</html>
